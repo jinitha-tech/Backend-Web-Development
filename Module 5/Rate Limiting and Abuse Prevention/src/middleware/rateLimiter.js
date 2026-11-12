@@ -39,3 +39,6 @@ module.exports = rateLimit({
     res.status(429).json({ message: 'Too many requests, please try again later.' });
   },
 });
+
+/*
+In a multi-instance deployment, the default in-memory store used by express-rate-limit is not sufficient because each instance maintains its own separate count of requests. This means that if a user makes requests to different instances (e.g., behind a load balancer), they could exceed the limit without being blocked, as each instance would not be aware of the requests made to the others.
